@@ -1,0 +1,34 @@
+package co.empresa.vivaeventos.notifications.domain.model.Dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class NotificationTemplateRequestDto {
+
+    @NotBlank
+    private String code;
+
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String channel;
+
+    private String subject;
+
+    @NotBlank
+    private String bodyTemplate;
+
+    private String[] variables;
+
+    @NotNull
+    private Boolean isActive;
+}

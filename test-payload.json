@@ -1,0 +1,14 @@
+﻿{
+  "userId": "550e8400-e29b-41d4-a716-446655440000",
+  "eventType": "PURCHASE",
+  "channel": "EMAIL",
+  "recipient": "alexandriabiblioteca611@gmail.com",
+  "variables": {
+    "nombre": "Carlos",
+    "evento": "Concierto de Rock",
+    "fecha": "15 de junio",
+    "cantidad": "2",
+    "total": "120.00",
+    "codigo_qr": "VIVA-ABC123"
+  }
+}
