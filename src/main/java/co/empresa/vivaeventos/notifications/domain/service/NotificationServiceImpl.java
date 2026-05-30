@@ -23,15 +23,34 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class NotificationServiceImpl implements INotificationService {
+
+    public NotificationServiceImpl(INotificationRepository notificationRepository,
+                                  INotificationTemplateRepository templateRepository,
+                                  List<IEmailProvider> emailProviders,
+                                  TemplateRenderer templateRenderer,
+                                  ObjectMapper objectMapper,
+                                  co.empresa.vivaeventos.notifications.config.EventsClient eventsClient,
+                                  co.empresa.vivaeventos.notifications.config.TicketsClient ticketsClient) {
+        this.notificationRepository = notificationRepository;
+        this.templateRepository = templateRepository;
+        this.emailProviders = emailProviders;
+        this.templateRenderer = templateRenderer;
+        this.objectMapper = objectMapper;
+        this.eventsClient = eventsClient;
+        this.ticketsClient = ticketsClient;
+    }
+
+
 
     private final INotificationRepository notificationRepository;
     private final INotificationTemplateRepository templateRepository;
     private final List<IEmailProvider> emailProviders;
     private final TemplateRenderer templateRenderer;
     private final ObjectMapper objectMapper;
+    private final co.empresa.vivaeventos.notifications.config.EventsClient eventsClient;
+    private final co.empresa.vivaeventos.notifications.config.TicketsClient ticketsClient;
 
     @Value("${notifications.retry.initial-delay-seconds:30}")
     private int initialDelaySeconds;
@@ -144,6 +163,45 @@ public class NotificationServiceImpl implements INotificationService {
         List<Notification> failed = notificationRepository.findFailedToRetry(now);
         for (Notification notification : failed) {
             processNotification(notification);
+        }
+    }
+
+    @Scheduled(cron = "0 0 8 * * *")
+    @Transactional
+    public void sendEventReminders() {
+        log.info("Running daily event reminders task...");
+        try {
+            java.util.List<Map<String, Object>> upcomingEvents = eventsClient.getUpcomingEvents();
+            LocalDateTime now = LocalDateTime.now();
+
+            for (Map<String, Object> event : upcomingEvents) {
+                UUID eventId = UUID.fromString(String.valueOf(event.get("id")));
+                LocalDateTime eventDate = LocalDateTime.parse(String.valueOf(event.get("eventDateTime")));
+
+                if (eventDate.toLocalDate().equals(now.toLocalDate().plusDays(3))) {
+                    java.util.List<Map<String, Object>> tickets = ticketsClient.getIssuedTicketsByEvent(eventId);
+
+                    for (Map<String, Object> ticket : tickets) {
+                        UUID userId = UUID.fromString(String.valueOf(ticket.get("userId")));
+                        String holderEmail = (String) ticket.get("holderEmail");
+
+                        Map<String, String> placeholders = new java.util.HashMap<>();
+                        placeholders.put("eventName", String.valueOf(event.get("name")));
+                        placeholders.put("eventDate", eventDate.toString());
+
+                        NotificationRequestDto request = new NotificationRequestDto();
+                        request.setUserId(userId);
+                        request.setRecipient(holderEmail);
+                        request.setChannel("EMAIL");
+                        request.setEventType("EVENT_REMINDER");
+                        request.setVariables(placeholders);
+
+                        this.create(request);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error during event reminders task: {}", e.getMessage());
         }
     }
 
