@@ -61,8 +61,7 @@ public class EventsClient {
 
             var response = restTemplate.exchange(
                 url, HttpMethod.GET, request,
-                new ParameterizedTypeReference<List<Map<String, Object>>>() {},
-                null
+                new ParameterizedTypeReference<List<Map<String, Object>>>() {}
             );
             return response.getBody();
         } catch (Exception e) {

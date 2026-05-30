@@ -182,18 +182,28 @@ public class NotificationServiceImpl implements INotificationService {
                     java.util.List<Map<String, Object>> tickets = ticketsClient.getIssuedTicketsByEvent(eventId);
 
                     for (Map<String, Object> ticket : tickets) {
-                        UUID userId = UUID.fromString(String.valueOf(ticket.get("userId")));
+                        Object userIdObj = ticket.get("userId");
+                        if (userIdObj == null) continue;
+
+                        UUID userId = UUID.fromString(String.valueOf(userIdObj));
                         String holderEmail = (String) ticket.get("holderEmail");
+                        String holderName = ticket.get("holderName") instanceof String hn ? hn : (holderEmail != null ? holderEmail : "");
+                        String eventName = String.valueOf(event.get("name"));
+                        String venueName = event.get("venueName") instanceof String vn ? vn : "";
 
                         Map<String, String> placeholders = new java.util.HashMap<>();
-                        placeholders.put("eventName", String.valueOf(event.get("name")));
-                        placeholders.put("eventDate", eventDate.toString());
+                        placeholders.put("nombre", holderName);
+                        placeholders.put("evento", eventName);
+                        placeholders.put("fecha", eventDate.toLocalDate().toString());
+                        placeholders.put("lugar", venueName);
+                        placeholders.put("hora", eventDate.toLocalTime().toString());
+                        placeholders.put("codigo_qr", "Disponible en tu perfil");
 
                         NotificationRequestDto request = new NotificationRequestDto();
                         request.setUserId(userId);
                         request.setRecipient(holderEmail);
                         request.setChannel("EMAIL");
-                        request.setEventType("EVENT_REMINDER");
+                        request.setEventType("REMINDER");
                         request.setVariables(placeholders);
 
                         this.create(request);
