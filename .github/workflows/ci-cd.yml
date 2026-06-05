@@ -154,6 +154,7 @@ jobs:
           region: us-central1
           env_vars: |
             SERVER_PORT=8080
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
             SPRING_DATASOURCE_URL=jdbc:postgresql://${{ secrets.DB_HOST }}:5432/vivaeventos_notifications?sslmode=require
             SPRING_DATASOURCE_USERNAME=${{ secrets.DB_USER }}
             SPRING_DATASOURCE_PASSWORD=${{ secrets.DB_PASSWORD }}
