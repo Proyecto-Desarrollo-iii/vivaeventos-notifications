@@ -2,19 +2,10 @@ INSERT INTO notification_templates (id, code, name, channel, subject, body_templ
 (
     gen_random_uuid(),
     'PURCHASE_EMAIL',
-    'Confirmación de compra',
+    'Confirmaci&oacute;n de compra',
     'EMAIL',
-    '¡Gracias por tu compra, {{nombre}}!',
-    '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:auto;">
-        <h2 style="color:#2d89ef;">✅ Compra confirmada</h2>
-        <p>Hola <strong>{{nombre}}</strong>,</p>
-        <p>Tu compra para <strong>{{evento}}</strong> se ha realizado con éxito.</p>
-        <p><strong>Fecha:</strong> {{fecha}}<br>
-        <strong>Cantidad:</strong> {{cantidad}} entrada(s)<br>
-        <strong>Total:</strong> ${{total}}</p>
-        <p>Presenta este código QR en la entrada: <strong>{{codigo_qr}}</strong></p>
-        <hr><p style="color:#888;">¡Disfruta el evento!</p>
-    </body></html>',
+    '&#10004; Compra Confirmada - Gracias por tu compra, {{nombre}}!',
+    '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Segoe UI,Arial,Helvetica,sans-serif;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:20px 0;"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);"><tr><td style="background:linear-gradient(135deg,#6C63FF,#4A42D4);padding:32px 40px;text-align:center;"><h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:700;">&#10004; Compra Confirmada</h1><p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:16px;">Gracias por tu compra, {{nombre}}!</p></td></tr><tr><td style="text-align:center;padding:32px 40px 0;"><div style="width:80px;height:80px;background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:50%;display:inline-block;line-height:80px;font-size:40px;">&#10004;</div><h2 style="color:#2E7D32;margin:16px 0 0;font-size:22px;">Todo listo para <strong>{{evento}}</strong>!</h2></td></tr><tr><td style="padding:24px 40px;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#F8FAFE;border-radius:12px;border:1px solid #E8EDF5;"><tr><td style="padding:24px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:8px 0;border-bottom:1px solid #E8EDF5;"><span style="color:#888;font-size:14px;">Evento</span><br><span style="color:#333;font-size:16px;font-weight:600;">{{evento}}</span></td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #E8EDF5;"><span style="color:#888;font-size:14px;">Fecha</span><br><span style="color:#333;font-size:16px;">{{fecha}}</span></td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #E8EDF5;"><span style="color:#888;font-size:14px;">Entradas</span><br><span style="color:#333;font-size:16px;font-weight:600;">{{cantidad}} entrada(s)</span></td></tr><tr><td style="padding:8px 0;"><span style="color:#888;font-size:14px;">Total pagado</span><br><span style="color:#6C63FF;font-size:20px;font-weight:700;">${{total}}</span></td></tr></table></td></tr></table></td></tr><tr><td style="text-align:center;padding:8px 40px 24px;"><div style="background-color:#FFF8E1;border:2px dashed #FFD54F;border-radius:12px;padding:20px;"><p style="margin:0 0 8px;color:#F57F17;font-size:14px;font-weight:600;">&#128274; C&oacute;digo de entrada</p><p style="margin:0;font-family:''Courier New'',monospace;font-size:18px;font-weight:700;color:#333;letter-spacing:2px;">{{codigo_qr}}</p><p style="margin:8px 0 0;color:#888;font-size:12px;">Presenta este c&oacute;digo en la entrada del evento</p></div></td></tr><tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #E8EDF5;margin:0;"></td></tr><tr><td style="padding:24px 40px 32px;text-align:center;"><p style="color:#888;font-size:13px;margin:0 0 4px;">Disfruta el evento!</p><p style="color:#aaa;font-size:12px;margin:0;">Equipo VivaEventos</p></td></tr></table></td></tr></table></body></html>',
     ARRAY['nombre', 'evento', 'fecha', 'cantidad', 'total', 'codigo_qr'],
     true,
     NOW(), NOW()
@@ -24,16 +15,8 @@ INSERT INTO notification_templates (id, code, name, channel, subject, body_templ
     'REMINDER_EMAIL',
     'Recordatorio de evento',
     'EMAIL',
-    '📅 Recordatorio: {{evento}} es mañana',
-    '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:auto;">
-        <h2 style="color:#f39c12;">⏰ Recordatorio</h2>
-        <p>Hola <strong>{{nombre}}</strong>,</p>
-        <p>Te recordamos que <strong>{{evento}}</strong> es mañana <strong>{{fecha}}</strong>.</p>
-        <p><strong>Lugar:</strong> {{lugar}}<br>
-        <strong>Hora:</strong> {{hora}}</p>
-        <p>No olvides llevar tu entrada con código <strong>{{codigo_qr}}</strong>.</p>
-        <hr><p style="color:#888;">¡Te esperamos!</p>
-    </body></html>',
+    '&#128198; Recordatorio: {{evento}} es ma&ntilde;ana',
+    '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Segoe UI,Arial,Helvetica,sans-serif;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:20px 0;"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);"><tr><td style="background:linear-gradient(135deg,#FF9800,#F57C00);padding:32px 40px;text-align:center;"><h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:700;">&#128198; Ma&ntilde;ana es el evento!</h1><p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:16px;">No te lo pierdas, {{nombre}}</p></td></tr><tr><td style="text-align:center;padding:32px 40px 0;"><div style="width:80px;height:80px;background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:50%;display:inline-block;line-height:80px;font-size:40px;">&#9200;</div><h2 style="color:#E65100;margin:16px 0 4px;font-size:22px;"><strong>{{evento}}</strong></h2><p style="color:#888;margin:0;font-size:15px;">Es ma&ntilde;ana! Prep&aacute;rate para disfrutar.</p></td></tr><tr><td style="padding:24px 40px;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#FFF8F0;border-radius:12px;border:1px solid #FFE0B2;"><tr><td style="padding:24px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td width="48" style="vertical-align:top;padding-right:12px;"><div style="width:36px;height:36px;background:#FF9800;border-radius:50%;color:#fff;text-align:center;line-height:36px;font-size:18px;">&#128197;</div></td><td style="padding:0 0 16px;"><span style="color:#888;font-size:13px;">Fecha</span><br><span style="color:#333;font-size:16px;font-weight:600;">{{fecha}}</span></td></tr><tr><td width="48" style="vertical-align:top;padding-right:12px;"><div style="width:36px;height:36px;background:#FF9800;border-radius:50%;color:#fff;text-align:center;line-height:36px;font-size:18px;">&#9906;</div></td><td style="padding:0 0 16px;"><span style="color:#888;font-size:13px;">Lugar</span><br><span style="color:#333;font-size:16px;font-weight:600;">{{lugar}}</span></td></tr><tr><td width="48" style="vertical-align:top;padding-right:12px;"><div style="width:36px;height:36px;background:#FF9800;border-radius:50%;color:#fff;text-align:center;line-height:36px;font-size:18px;">&#9201;</div></td><td style="padding:0;"><span style="color:#888;font-size:13px;">Hora</span><br><span style="color:#333;font-size:16px;font-weight:600;">{{hora}}</span></td></tr></table></td></tr></table></td></tr><tr><td style="text-align:center;padding:8px 40px 24px;"><div style="background-color:#FFF8E1;border:2px dashed #FFD54F;border-radius:12px;padding:20px;"><p style="margin:0 0 8px;color:#F57F17;font-size:14px;font-weight:600;">&#128274; Tu c&oacute;digo de entrada</p><p style="margin:0;font-family:''Courier New'',monospace;font-size:18px;font-weight:700;color:#333;letter-spacing:2px;">{{codigo_qr}}</p></div></td></tr><tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #E8EDF5;margin:0;"></td></tr><tr><td style="padding:24px 40px 32px;text-align:center;"><p style="color:#888;font-size:13px;margin:0 0 4px;">Te esperamos!</p><p style="color:#aaa;font-size:12px;margin:0;">Equipo VivaEventos</p></td></tr></table></td></tr></table></body></html>',
     ARRAY['nombre', 'evento', 'fecha', 'lugar', 'hora', 'codigo_qr'],
     true,
     NOW(), NOW()
@@ -43,17 +26,8 @@ INSERT INTO notification_templates (id, code, name, channel, subject, body_templ
     'CHANGE_EMAIL',
     'Cambio en evento',
     'EMAIL',
-    '🔔 Cambios en {{evento}}',
-    '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:auto;">
-        <h2 style="color:#e67e22;">🔄 Cambio en tu evento</h2>
-        <p>Hola <strong>{{nombre}}</strong>,</p>
-        <p>Te informamos que se han realizado los siguientes cambios en <strong>{{evento}}</strong>:</p>
-        <p><strong>Cambio:</strong> {{detalle_cambio}}</p>
-        <p><strong>Nueva fecha:</strong> {{nueva_fecha}}<br>
-        <strong>Nuevo lugar:</strong> {{nuevo_lugar}}</p>
-        <p>Disculpa las molestias. Puedes ver los detalles actualizados en tu panel.</p>
-        <hr><p style="color:#888;">Gracias por tu comprensión</p>
-    </body></html>',
+    '&#9888; Cambios en {{evento}}',
+    '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Segoe UI,Arial,Helvetica,sans-serif;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:20px 0;"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);"><tr><td style="background:linear-gradient(135deg,#FF7043,#D84315);padding:32px 40px;text-align:center;"><h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:700;">&#9888; Cambios en tu evento</h1><p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:16px;">Revisa los detalles actualizados, {{nombre}}</p></td></tr><tr><td style="text-align:center;padding:32px 40px 0;"><div style="width:80px;height:80px;background:linear-gradient(135deg,#FBE9E7,#FFCCBC);border-radius:50%;display:inline-block;line-height:80px;font-size:40px;">&#9888;</div><h2 style="color:#BF360C;margin:16px 0 4px;font-size:22px;">Se modific&oacute;: <strong>{{evento}}</strong></h2><p style="color:#888;margin:0;font-size:15px;">{{detalle_cambio}}</p></td></tr><tr><td style="padding:24px 40px;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#FFF8F0;border-radius:12px;border:1px solid #FFCCBC;"><tr><td style="padding:24px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:12px;background:#FFF3E0;border-radius:8px;"><span style="color:#888;font-size:13px;">Nueva fecha</span><br><span style="color:#D84315;font-size:18px;font-weight:700;">{{nueva_fecha}}</span></td></tr><tr><td style="height:8px;"></td></tr><tr><td style="padding:12px;background:#FFF3E0;border-radius:8px;"><span style="color:#888;font-size:13px;">Nuevo lugar</span><br><span style="color:#D84315;font-size:18px;font-weight:700;">{{nuevo_lugar}}</span></td></tr></table></td></tr></table></td></tr><tr><td style="text-align:center;padding:8px 40px 24px;"><p style="color:#888;font-size:14px;margin:0;">Disculpa las molestias. Puedes ver los detalles actualizados en tu panel.</p></td></tr><tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #E8EDF5;margin:0;"></td></tr><tr><td style="padding:24px 40px 32px;text-align:center;"><p style="color:#888;font-size:13px;margin:0 0 4px;">Gracias por tu comprensi&oacute;n</p><p style="color:#aaa;font-size:12px;margin:0;">Equipo VivaEventos</p></td></tr></table></td></tr></table></body></html>',
     ARRAY['nombre', 'evento', 'detalle_cambio', 'nueva_fecha', 'nuevo_lugar'],
     true,
     NOW(), NOW()
@@ -61,18 +35,10 @@ INSERT INTO notification_templates (id, code, name, channel, subject, body_templ
 (
     gen_random_uuid(),
     'CANCELLATION_EMAIL',
-    'Cancelación de evento',
+    'Cancelaci&oacute;n de evento',
     'EMAIL',
-    '❌ Evento cancelado: {{evento}}',
-    '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:auto;">
-        <h2 style="color:#e74c3c;">❌ Evento cancelado</h2>
-        <p>Hola <strong>{{nombre}}</strong>,</p>
-        <p>Lamentamos informarte que <strong>{{evento}}</strong> programado para el {{fecha}} ha sido cancelado.</p>
-        <p><strong>Motivo:</strong> {{motivo}}</p>
-        <p>El reembolso de <strong>${{total}}</strong> será procesado a tu método de pago en un plazo de 5-7 días hábiles.</p>
-        <p>Si tienes dudas, contáctanos.</p>
-        <hr><p style="color:#888;">Sentimos las molestias</p>
-    </body></html>',
+    '&#10060; Evento cancelado: {{evento}}',
+    '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Segoe UI,Arial,Helvetica,sans-serif;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:20px 0;"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);"><tr><td style="background:linear-gradient(135deg,#EF5350,#C62828);padding:32px 40px;text-align:center;"><h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:700;">&#10060; Evento Cancelado</h1><p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:16px;">Lo sentimos, {{nombre}}</p></td></tr><tr><td style="text-align:center;padding:32px 40px 0;"><div style="width:80px;height:80px;background:linear-gradient(135deg,#FFEBEE,#FFCDD2);border-radius:50%;display:inline-block;line-height:80px;font-size:40px;">&#10060;</div><h2 style="color:#B71C1C;margin:16px 0 4px;font-size:22px;">Lamentamos informarte que <strong>{{evento}}</strong> ha sido cancelado.</h2></td></tr><tr><td style="padding:24px 40px;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#FFF5F5;border-radius:12px;border:1px solid #FFCDD2;"><tr><td style="padding:24px;"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:8px 0;border-bottom:1px solid #FFCDD2;"><span style="color:#888;font-size:14px;">Evento</span><br><span style="color:#333;font-size:16px;font-weight:600;">{{evento}}</span></td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #FFCDD2;"><span style="color:#888;font-size:14px;">Fecha original</span><br><span style="color:#333;font-size:16px;">{{fecha}}</span></td></tr><tr><td style="padding:8px 0;"><span style="color:#888;font-size:14px;">Motivo</span><br><span style="color:#C62828;font-size:16px;font-weight:600;">{{motivo}}</span></td></tr></table></td></tr></table></td></tr><tr><td style="text-align:center;padding:8px 40px 24px;"><div style="background-color:#E3F2FD;border:2px solid #90CAF9;border-radius:12px;padding:20px;"><p style="margin:0 0 8px;color:#1565C0;font-size:16px;font-weight:600;">&#128179; Informaci&oacute;n de reembolso</p><p style="margin:0;color:#333;font-size:15px;">El reembolso de <strong style="font-size:22px;color:#1565C0;">${{total}}</strong> ser&aacute; procesado a tu m&eacute;todo de pago en un plazo de <strong>5-7 d&iacute;as h&aacute;biles</strong>.</p></div></td></tr><tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #E8EDF5;margin:0;"></td></tr><tr><td style="padding:24px 40px 32px;text-align:center;"><p style="color:#888;font-size:13px;margin:0 0 4px;">Si tienes dudas, cont&aacute;ctanos.</p><p style="color:#aaa;font-size:12px;margin:0;">Sentimos las molestias &mdash; Equipo VivaEventos</p></td></tr></table></td></tr></table></body></html>',
     ARRAY['nombre', 'evento', 'fecha', 'motivo', 'total'],
     true,
     NOW(), NOW()
@@ -82,19 +48,8 @@ INSERT INTO notification_templates (id, code, name, channel, subject, body_templ
     'PROMOTION_EMAIL',
     'Oferta especial para ti',
     'EMAIL',
-    '🎉 {{descuento}} off en {{evento}}',
-    '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;padding:20px;max-width:600px;margin:auto;">
-        <h2 style="color:#9b59b6;">🎉 Oferta especial</h2>
-        <p>Hola <strong>{{nombre}}</strong>,</p>
-        <p>No te pierdas <strong>{{evento}}</strong> — tenemos una oferta especial para ti:</p>
-        <p style="font-size:24px;text-align:center;padding:15px;background:#f0f0f0;border-radius:8px;">
-            <strong>{{descuento}}</strong>
-        </p>
-        <p><strong>Código:</strong> {{codigo_promocion}}<br>
-        <strong>Válido hasta:</strong> {{fecha_expiracion}}</p>
-        <p>Usa el código al comprar en vivaeventos.com</p>
-        <hr><p style="color:#888;">No dejes pasar esta oportunidad</p>
-    </body></html>',
+    '&#127881; {{descuento}} off en {{evento}}',
+    '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;background-color:#f4f6f9;font-family:Segoe UI,Arial,Helvetica,sans-serif;"><table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f9;padding:20px 0;"><tr><td align="center"><table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);"><tr><td style="background:linear-gradient(135deg,#AB47BC,#7B1FA2);padding:32px 40px;text-align:center;"><h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:700;">&#127881; Oferta especial para ti!</h1><p style="color:rgba(255,255,255,0.85);margin:8px 0 0;font-size:16px;">No dejes pasar esta oportunidad, {{nombre}}</p></td></tr><tr><td style="text-align:center;padding:32px 40px 0;"><div style="width:80px;height:80px;background:linear-gradient(135deg,#F3E5F5,#E1BEE7);border-radius:50%;display:inline-block;line-height:80px;font-size:40px;">&#127881;</div><h2 style="color:#6A1B9A;margin:16px 0 4px;font-size:22px;">Tenemos una oferta para ti!</h2></td></tr><tr><td style="padding:24px 40px;"><table width="100%" cellpadding="0" cellspacing="0" style="background:linear-gradient(135deg,#F3E5F5,#EDE7F6);border-radius:16px;border:2px solid #CE93D8;"><tr><td style="text-align:center;padding:32px 24px;"><p style="color:#888;margin:0 0 8px;font-size:14px;text-transform:uppercase;letter-spacing:2px;">Descuento especial</p><div style="font-size:48px;font-weight:800;color:#7B1FA2;margin:8px 0;">{{descuento}}</div><p style="color:#6A1B9A;margin:8px 0 0;font-size:16px;">en <strong>{{evento}}</strong></p></td></tr></table></td></tr><tr><td style="text-align:center;padding:8px 40px 24px;"><div style="background-color:#FFF8E1;border:2px dashed #FFD54F;border-radius:12px;padding:20px;"><p style="margin:0 0 8px;color:#F57F17;font-size:14px;font-weight:600;">&#127873; Tu c&oacute;digo promocional</p><p style="margin:0;font-family:''Courier New'',monospace;font-size:24px;font-weight:700;color:#333;letter-spacing:3px;">{{codigo_promocion}}</p><p style="margin:8px 0 0;color:#888;font-size:13px;">V&aacute;lido hasta: <strong>{{fecha_expiracion}}</strong></p></div></td></tr><tr><td style="text-align:center;padding:8px 40px 24px;"><p style="color:#888;font-size:14px;margin:0;">Usa el c&oacute;digo al comprar en vivaeventos.com</p></td></tr><tr><td style="padding:0 40px;"><hr style="border:none;border-top:1px solid #E8EDF5;margin:0;"></td></tr><tr><td style="padding:24px 40px 32px;text-align:center;"><p style="color:#aaa;font-size:12px;margin:0;">No dejes pasar esta oportunidad &mdash; Equipo VivaEventos</p></td></tr></table></td></tr></table></body></html>',
     ARRAY['nombre', 'evento', 'descuento', 'codigo_promocion', 'fecha_expiracion'],
     true,
     NOW(), NOW()
