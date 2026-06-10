@@ -1,14 +1,11 @@
 package co.empresa.vivaeventos.notifications.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
 
 import static org.hamcrest.Matchers.containsString;
 
@@ -20,32 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
-class TicketsClientTest {
+class TicketsClientTest extends BaseHttpClientTest {
 
-    private static final String SECRET = "dGhpcy1pcy1hLXNlY3JldC1rZXktdGhhdC1pcy1hdC1sZWFzdC0yNTYtYml0cy1sb25nLWZvci1oczI1Ng==";
-
-    private RestTemplate restTemplate;
     private TicketsClient ticketsClient;
-    private MockRestServiceServer mockServer;
-    private ObjectMapper objectMapper;
 
     @BeforeEach
-    void setUp() {
-        restTemplate = new RestTemplate();
-        mockServer = MockRestServiceServer.bindTo(restTemplate).build();
-        objectMapper = new ObjectMapper();
+    void setUpClient() {
         ticketsClient = new TicketsClient(new RestTemplateBuilder(), "http://localhost:8085", SECRET);
-        var field = TicketsClient.class.getDeclaredFields();
-        for (var f : field) {
-            f.setAccessible(true);
-            if (f.getName().equals("restTemplate")) {
-                try {
-                    f.set(ticketsClient, restTemplate);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+        injectRestTemplate(ticketsClient, TicketsClient.class);
     }
 
     @Test
