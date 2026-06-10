@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ class EventsClientTest {
         restTemplate = new RestTemplate();
         mockServer = MockRestServiceServer.bindTo(restTemplate).build();
         objectMapper = new ObjectMapper();
-        eventsClient = new EventsClient("http://localhost:8081", SECRET);
+        eventsClient = new EventsClient(new RestTemplateBuilder(), "http://localhost:8081", SECRET);
         var field = EventsClient.class.getDeclaredFields();
         for (var f : field) {
             f.setAccessible(true);

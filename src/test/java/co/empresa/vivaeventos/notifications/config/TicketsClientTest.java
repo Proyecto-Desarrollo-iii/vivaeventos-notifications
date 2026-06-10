@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -33,7 +34,7 @@ class TicketsClientTest {
         restTemplate = new RestTemplate();
         mockServer = MockRestServiceServer.bindTo(restTemplate).build();
         objectMapper = new ObjectMapper();
-        ticketsClient = new TicketsClient("http://localhost:8085", SECRET);
+        ticketsClient = new TicketsClient(new RestTemplateBuilder(), "http://localhost:8085", SECRET);
         var field = TicketsClient.class.getDeclaredFields();
         for (var f : field) {
             f.setAccessible(true);
