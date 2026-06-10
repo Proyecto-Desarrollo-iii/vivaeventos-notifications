@@ -9,7 +9,7 @@ on:
       - 'Dockerfile'
       - '.github/**'
   pull_request:
-    branches: [main, master]
+    branches: [main, master, develop]
   workflow_dispatch:
 
 env:
@@ -37,6 +37,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -63,6 +65,8 @@ jobs:
           retention-days: 7
 
       - name: SonarQube analysis
+        if: ${{ env.SONAR_TOKEN != '' }}
+        continue-on-error: true
         uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -71,6 +75,7 @@ jobs:
             -Dsonar.projectKey=vivaeventos-notifications
             -Dsonar.organization=proyecto-desarrollo-iii
             -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.sources=src/main/java
             -Dsonar.java.binaries=target/classes
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
